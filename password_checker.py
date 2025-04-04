@@ -28,25 +28,54 @@ def check_password_strength(password):
     # Classify strength based on entropy
     if entropy > 80:
         strength = "Very Strong"
+        print(f"Password Strength: {strength}")
+        print(f"Entropy: {entropy:.2f} bits")
     elif entropy > 60:
         strength = "Strong"
+        print(f"Password Strength: {strength}")
+        print(f"Entropy: {entropy:.2f} bits")
     elif entropy > 40:
         strength = "Moderate"
+        print(f"Password Strength: {strength}")
+        print(f"Entropy: {entropy:.2f} bits")
+        print(f"Password is not strong enough, please read recommendations and try again")
+
+        print("Recommendations:")
+        if not length_criteria: print("- Use at least 12 characters in the password")
+        if not uppercase_criteria: print("- Add atleast one uppercase letter in the password")
+        if not lowercase_criteria: print("- Add atleast one lowercase letter in the password")
+        if not digit_criteria: print("- Include more than one number in the password")
+        if not special_char_criteria: print("- Use special characters in the password")
+        password = input("Enter a password:") 
+        check_password_strength(password)
+
     else:
         strength = "Weak"
+        print(f"Password Strength: {strength}")
+        print(f"Entropy: {entropy:.2f} bits")
+        print(f"Password is not strong enough, please read recommendations and try again")
+
+        print("Recommendations:")
+        if not length_criteria: print("- Use at least 12 characters in the password")
+        if not uppercase_criteria: print("- Add atleast one uppercase letter in the password")
+        if not lowercase_criteria: print("- Add atleast one lowercase letter in the password")
+        if not digit_criteria: print("- Include more than one number in the password")
+        if not special_char_criteria: print("- Use special characters in the password")
+        #User input
+        password = input("Enter a password:") 
+        check_password_strength(password)
 
 
-    #print result 
-    print(f"Password Strength: {strength}")
-    print(f"Entropy: {entropy:.2f} bits")
+
 
     #Password strength recommendations
-    print("Recommendations:")
-    if not length_criteria: print("- Use at least 12 characters in the password")
-    if not uppercase_criteria: print("- Add atleast one uppercase letter in the password")
-    if not lowercase_criteria: print("- Add atleast one lowercase letter in the password")
-    if not digit_criteria: print("- Include more than one number in the password")
-    if not special_char_criteria: print("- Use special characters in the password")
+    if entropy < 80:
+        print("Password is strong enough, but here are some recommendations:")
+        if not length_criteria: print("- Use at least 12 characters in the password")
+        if not uppercase_criteria: print("- Add atleast one uppercase letter in the password")
+        if not lowercase_criteria: print("- Add atleast one lowercase letter in the password")
+        if not digit_criteria: print("- Include more than one number in the password")
+        if not special_char_criteria: print("- Use special characters in the password")
 
     
 
