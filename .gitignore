@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+#Personal environment ignores 
+test.sh 
+test_password_checker.py 

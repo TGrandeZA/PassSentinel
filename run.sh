@@ -1,1 +1,1 @@
-python3 main.py 
+python3 password_checker.py 
