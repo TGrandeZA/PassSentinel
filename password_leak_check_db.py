@@ -36,14 +36,16 @@ def verify_all_hashes(db_name="password_hashes.db", limit=10):
     connection.commit()
     connection.close()
 
-verify_all_hashes(limit=100) #check all hashed passwords in the database if they've been leaked (Limits it to 100 passwords ).
-view_table() #view the database
+verify_all_hashes(limit=100) #check all hashed passwords in the database if they've been leaked (Limits it to 100 passwords )
+view_table()  #view the database after the scan
 
-#Automation. passwords must be verified for leaks every day at 09:00
+print("Passwords are automatically checked for possible leaks everyday at 09:00 ⏳")
+
+#Automation. passwords in databse must be verified for leaks every day at 09:00
 def job(): 
 
-    verify_all_hashes(limit=100) #check all hashed passwords in the database if they've been leaked (Limits it to 100 passwords ).
-    view_table() #view the database
+    verify_all_hashes(limit=100) 
+    view_table() 
 
 schedule.every().day.at("09:00").do(job)
 
