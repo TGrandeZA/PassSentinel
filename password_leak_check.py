@@ -18,6 +18,9 @@ def check_password_pwned(password):
                 print(f"Warning ⚠️: Your password has been found in {count} breaches! Please change your password now.")
                 return   
     print("✅ Your password has not been found in any breaches")
+    
+
+
 
 password = input("Enter your password again, to check for a possible leak:")
 check_password_pwned(password)

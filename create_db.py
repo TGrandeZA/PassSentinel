@@ -30,7 +30,7 @@ def populate_pass_db(file_path, db_name="password_hashes.db"): #populate the new
 
 #populate_pass_db("password_hashes.txt") ran once
 
-def update_schema(db_name = "password_hashes.db"): #udpate the table to add a column to show how many leaks the hashed password has been in by using the API
+def update_schema_cl(db_name = "password_hashes.db"): #udpate the table to add a column to show how many leaks the hashed password has been in by using the API
     connection = sqlite3.connect(db_name) 
     conn = connection.cursor()
 
@@ -42,13 +42,29 @@ def update_schema(db_name = "password_hashes.db"): #udpate the table to add a co
     connection.close()
     print("Column created.")
 
-#update_schema() ran once 
+#update_schema_cl() ran once 
+
+def update_schema_status(db_name = "password_hashes.db"): #udpate the table to add a column to show the status of the password leaked or Safe.
+    connection = sqlite3.connect(db_name) 
+    conn = connection.cursor()
+
+    try: 
+        conn.execute("ALTER TABLE leaks ADD COLUMN status TEXT DEFAULT ''") 
+    except sqlite3.OperationalError:
+        print("Column exists")
+    connection.commit()
+    connection.close()
+    print("Column created.")
+
+#update_schema_status() ran once
 
 def view_table(db_name="password_hashes.db"): #view the database
     conn = sqlite3.connect(db_name)
     df = pd.read_sql_query("SELECT * FROM leaks", conn)
     conn.close()
     print(df)
+
+
 
 view_table() #view the database
 
