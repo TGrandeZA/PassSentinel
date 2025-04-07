@@ -1,9 +1,8 @@
-#TODO automate this 
 import requests
-import sqlite3
-import pandas as pd 
+import sqlite3 
 import time 
 import schedule 
+from create_db import view_table
 
 def check_db_hash(db_hash): #check if each hash is in SHA1 format for API use.
     prefix = db_hash[:5]
@@ -37,11 +36,8 @@ def verify_all_hashes(db_name="password_hashes.db", limit=10):
     connection.commit()
     connection.close()
 
-def view_table(db_name="password_hashes.db"): #view the database (leaks table)
-    conn = sqlite3.connect(db_name)
-    df = pd.read_sql_query("SELECT * FROM leaks", conn)
-    conn.close()
-    print(df)
+verify_all_hashes(limit=100) #check all hashed passwords in the database if they've been leaked (Limits it to 100 passwords ).
+view_table() #view the database
 
 #Automation. passwords must be verified for leaks every day at 09:00
 def job(): 

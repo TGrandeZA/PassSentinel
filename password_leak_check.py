@@ -1,7 +1,8 @@
 import hashlib 
 import requests 
+import sqlite3
+from create_db import view_table
 
-#TODO If no leaks are found you add the password into the sqllite database.
 
 def check_password_pwned(password): 
     sha1_hash = hashlib.sha1(password.encode()).hexdigest().upper() #encrypts password using secure hash algorithm 1 (SHA1 required to use the API)
@@ -16,10 +17,16 @@ def check_password_pwned(password):
         for h, count in hashes: 
             if h == suffix: #loops through the lists of given SHA1 hashed passwords, and finds the password that matches the has password entered.
                 print(f"Warning ⚠️: Your password has been found in {count} breaches! Please change your password now.")
-                return   
-    print("✅ Your password has not been found in any breaches")
-    
+                return 
+     # If not found in leaks, store hash in database  
+    connection = sqlite3.connect("password_hashes.db")
+    conn = connection.cursor()
 
+    conn.execute("INSERT INTO leaks (hash, confirmed_leaks, status) VALUES (?, ?, ?)", (sha1_hash, 0, 'SAFE ✅'))
+    connection.commit()
+    connection.close()
+    print("Your password has not been found in any breaches and has now been added to the database ✅")
+    view_table()
 
 
 password = input("Enter your password again, to check for a possible leak:")
