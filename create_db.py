@@ -75,7 +75,7 @@ def view_table(db_name="password_hashes.db"): #view the database
     conn.close()
     print(df)
 
-#view_table() 
+view_table() 
 
 
 
