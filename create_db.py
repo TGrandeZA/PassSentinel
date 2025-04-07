@@ -58,13 +58,22 @@ def update_schema_status(db_name = "password_hashes.db"): #udpate the table to a
 
 #update_schema_status() ran once
 
+def clear_table(db_name="password_hashes.db"): #clear the data in the status and confirmed leaks column for testing
+    connection = sqlite3.connect(db_name)
+    conn = connection.cursor()
+
+    conn.execute("UPDATE leaks SET confirmed_leaks = 0;")
+    conn.execute("UPDATE leaks SET status = '';")
+    connection.commit()
+    connection.close()
+
+#clear_table()  
+
 def view_table(db_name="password_hashes.db"): #view the database
     conn = sqlite3.connect(db_name)
     df = pd.read_sql_query("SELECT * FROM leaks", conn)
     conn.close()
     print(df)
-
-
 
 view_table() #view the database
 
