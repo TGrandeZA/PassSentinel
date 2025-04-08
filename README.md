@@ -1,6 +1,6 @@
 # 🔐 PassSentinel
 
-**PassSentinel** is a cybersecurity-focused password auditing tool that ensures strong password hygiene, checks password leaks using the [Have I Been Pwned](https://haveibeenpwned.com/API/v3#PwnedPasswords) API with k-anonymity for private data checking and securely manages verified password hashes in a local SQLite database.
+**PassSentinel** is a cybersecurity-focused password auditing tool that ensures strong password hygiene by using regex and entropy calculations. It checks for password leaks using the [Have I Been Pwned](https://haveibeenpwned.com/API/v3#PwnedPasswords) API with k-anonymity for private data checking and securely manages verified password hashes in a local SQLite database.
 
 ---
 
